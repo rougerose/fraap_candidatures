@@ -1,0 +1,25 @@
+table#candidatures {
+	margin: .5em 0;
+	background-color: #fefefe;
+	border: 1px solid #000; border-bottom-width: 0; }
+	#candidatures th, #candidatures td {
+		border: 1px solid #000; border-width: 0 1px 1px 0;
+		padding: .3em 3px .2em; }
+	#candidatures thead th:last-child,
+	.inscriptions #candidatures td:last-child,
+	#candidatures td.supprimer { border-right-width: 0; }
+	#candidatures .supprimer a { font-weight: bold; color: red; }
+
+/* page candidature, faire apparaître les labels */
+.candidature .no_onglets #contenu #wysiwyg div.label { display: block !important; }
+
+/* Jquery UI Dialog */
+.ui-dialog {
+	padding: 0;
+	-webkit-border-radius: 5px;
+	   -moz-border-radius: 5px;
+	        border-radius: 5px; }
+.ui-dialog.ui-widget-content { border: 8px solid rgba(0,0,0,0.5); }
+	.ui-dialog .ui-widget-header {
+		background: none; background-color: #000; color: #fff; border: none; }
+	.ui-dialog .ui-dialog-content p { margin: 0; }

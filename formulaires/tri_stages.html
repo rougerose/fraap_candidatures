@@ -1,0 +1,83 @@
+[(#REM)
+	tableau pour stocker les données du formulaires
+	- r = les régions,
+	- c = les compétences et les domaines recherchés (les données sont les mêmes)
+]
+	#SET{r,#ARRAY} #SET{c,#ARRAY} #SET{saisies,#ARRAY}
+
+<BOUCLE_yaml(DATA){source yaml, #CHEMIN{formulaires/stages.yaml}}>
+[(#CLE|=={regions}|oui)[(#SET{r, #VALEUR})]]
+[(#CLE|=={competences}|oui)[(#SET{c,#VALEUR})]]
+</BOUCLE_yaml>
+
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<div id="formulaire_tri_criteres" class="tabs">
+			<ul class="liste">
+				<li><a href="#disponibilite"><:candidatures:label_dispo_consultation:></a></li>
+				<li><a href="#localisation"><:candidatures:label_localisation_geo_consultation_abrev:></a></li>
+				<li><a href="#formation"><:candidatures:label_formation_consultation:></a></li>
+				<li><a href="#competences"><:candidatures:label_competences_offre_consultation_tri:></a></li>
+				<li><a href="#recherches"><:candidatures:label_competences_recherche_consultation_tri:></a></li>
+			</ul>
+			<div id="disponibilite">
+				<ul class="fields enligne clearfix">
+					[(#SAISIE{date, date_debut,
+						label=<:candidatures:label_date_debut:>,
+						explication=<:candidatures:info_format_date:>})]
+					[(#SAISIE{date, date_fin,
+						label=<:candidatures:label_date_fin:>,
+						explication=<:candidatures:info_format_date:>})]
+				</ul>
+
+			</div><!-- #dispo -->
+
+			<div id="localisation">
+				<ul class="fields clearfix">
+					[(#SAISIE{checkbox,regions,
+						label=<:candidatures:label_regions_consultation:>,
+						datas=#GET{r}})]
+					[(#SAISIE{input, ville_stage,
+						label=<:candidatures:label_ville_inscription:>, explication=<:candidatures:info_saisie_ville_stage:>, class=text})]
+				</ul>
+			</div><!-- #localisation -->
+
+			<div id="formation">
+				<ul class="fields enligne clearfix">
+					[(#SAISIE{input,ecole,label=<:candidatures:label_ecole:>})]
+					[(#SAISIE{input,ville_ecole,label=<:candidatures:label_ville_consultation:>})]
+					[(#SAISIE{input,diplome,label=<:candidatures:label_diplome:>})]
+					[(#SAISIE{input,niveau,label=<:candidatures:label_diplome_niveau:>})]
+				</ul>
+			</div><!-- #formation -->
+
+			<div id="competences">
+				<ul class="fields clearfix">
+					[(#SAISIE{checkbox,competences_offre,
+						label=<:candidatures:label_competences_offre_consultation:>,
+						datas=#GET{c}})]
+				</ul>
+			</div><!-- #competences -->
+
+			<div id="recherches">
+				<ul class="fields clearfix triple">
+					[(#SAISIE{checkbox,competences_recherche,
+						label=<:candidatures:label_recherches_consultation:>,
+						datas=#GET{c}})]
+				</ul>
+			</div><!-- #recherches -->
+
+		</div><!-- #tabs -->
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit bouton medium' value='<:candidatures:bouton_recharger:>' /></p>
+	</div></form>
+
+</div>

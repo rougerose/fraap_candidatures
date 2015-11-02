@@ -1,0 +1,68 @@
+[(#REM)
+	tableau pour stocker les données du formulaires
+	- regions = les régions,
+	- competences = les compétences et les domaines recherchés (les données sont les mêmes)
+]
+	#SET{regions,#ARRAY} #SET{competences,#ARRAY}
+
+<BOUCLE_yaml(DATA){source yaml, #CHEMIN{formulaires/stages.yaml}}>
+[(#CLE|=={regions}|oui)[(#SET{data_regions, #VALEUR})]]
+[(#CLE|=={competences}|oui)[(#SET{data_competences,#VALEUR})]]
+</BOUCLE_yaml>
+
+<div>
+	<B_stages>
+	<p class="verdana2">[(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:criteres_resultat,candidatures:criteres_resultats,nb})]</p>
+	[<p class="pagination">(#PAGINATION{page})</p>]
+	<table id="candidatures" class="verdana1" style="width:100%;" cellpadding="0" cellspacing="0">
+		<thead>
+			<tr class="titrem arial2"><th>#</th><th>NOM Prénom</th><th>Créer</th><th>Modifier</th><th colspan="2">Candidature</th><th></th></tr>
+		</thead>
+		<tbody>
+			<BOUCLE_stages(CANDIDATURES){tout}{!par date}{pagination}>
+
+			#SET{reg,#REGIONS|unserialize}
+			#SET{comp,#COMPETENCES_OFFRE|unserialize}
+			#SET{rech,#COMPETENCES_RECHERCHE|unserialize}
+
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td rowspan="8">
+					[(#AUTORISER{voir,candidature,#ID_CANDIDATURE})
+					<a href="[(#URL_ECRIRE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]">#ID_CANDIDATURE</a>
+					]
+				</td>
+				<BOUCLE_auteur(AUTEURS candidatures){id_auteur}{id_candidature}{tout}>
+				<td rowspan="8">[(#NOM|majuscules)][ (#PRENOM)]</td>
+				</BOUCLE_auteur>
+				<td rowspan="8">[(#DATE|affdate{d/m/Y})]</td>
+				<td rowspan="8">[(#MAJ|affdate{d/m/Y})]</td>
+				<th>Du</th><td>[(#DATE_DEBUT|affdate{d/m/Y})]</td>
+				<td class="supprimer" rowspan="8"><a href="[(#URL_ACTION_AUTEUR{supprimer_candidature,#ID_CANDIDATURE,#SELF})]" class="bt supprimer" title="<:candidatures:label_bouton_supprimer_candidature:>">X</a></td>
+			</tr>
+			<tr>
+				<th>Au</th><td>[(#DATE_FIN|affdate{d/m/Y})]</td>
+			</tr>
+			<tr>
+				<th>Régions</th><td><BOUCLE_regions(POUR){tableau #GET{reg}}{', '}>[(#GET{data_regions}|table_valeur{#VALEUR})]</BOUCLE_regions></td>
+			</tr>
+			<tr>
+				<th>Ville</th><td>#VILLE</td>
+			</tr>
+			<tr>
+				<th>Ecole/Ville</th><td>#ECOLE/#VILLE_ECOLE</td>
+			</tr>
+			<tr>
+				<th>Diplome/Niveau</th><td>#DIPLOME/#NIVEAU</td>
+			</tr>
+			<tr>
+				<th>Compétences</th><td><BOUCLE_offres(POUR){tableau #GET{comp}}{', '}>[(#GET{data_competences}|table_valeur{#VALEUR})]</BOUCLE_offres></td>
+			</tr>
+			<tr>
+				<th>Recherches</th><td><BOUCLE_recherches(POUR){tableau #GET{rech}}{', '}>[(#GET{data_competences}|table_valeur{#VALEUR})]</BOUCLE_recherches></td>
+			</tr>
+			</BOUCLE_stages>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{page})</p>]
+	</B_stages>
+</div>

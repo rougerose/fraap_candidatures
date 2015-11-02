@@ -1,0 +1,19 @@
+[(#AUTORISER{voir,candidatures})
+	<h1><:candidatures:liste_des_candidatures:></h1>
+
+	<div class='ajax'>
+		<INCLURE{fond=inclure/prive-liste-candidatures,env,ajax}>
+	</div>
+
+	<!--#navigation-->
+	<div class='cadre cadre-info'>
+		<p>Toutes les candidatures enregistrées (classées par date de création, de la plus récente à la plus ancienne).</p>
+		[(#AUTORISER{voir,inscriptions})
+			<hr class="spip" />
+			[<div>
+				<p><a href="(#URL_ECRIRE{inscriptions})" class="cellule-h">Afficher les inscriptions</a></p>
+			</div>]
+		]
+	</div>
+	<!--/#navigation-->
+]

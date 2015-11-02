@@ -1,0 +1,13 @@
+<ul id="navigation-messagerie">
+	<BOUCLE_recus(ARTICLES){id_article=511}>
+	<li[ class="(#EXPOSE)"]>
+		[(#URL_ARTICLE|lien_ou_expose{#TITRE, #ENV{id_article}|=={#ID_ARTICLE}})]
+		<BOUCLE_nonlu(MESSAGES auteurs_messages){auteurs_messages.id_auteur=#SESSION{id_auteur}}{auteurs_messages.vu=non}{!par date_heure}> </BOUCLE_nonlu>
+		<span class="info-nonlu">[[(#TOTAL_BOUCLE|singulier_ou_pluriel{candidatures:message_nonlu,candidatures:messages_nonlus,nb})]]</span>
+		</B_nonlu><//B_nonlu>
+	</li>
+	</BOUCLE_recus>
+	<BOUCLE_envoyes(ARTICLES){id_article=510}>
+	<li[ class="(#EXPOSE)"]>[(#URL_ARTICLE|lien_ou_expose{#TITRE, #ENV{id_article}|=={#ID_ARTICLE}})]</li>
+	</BOUCLE_envoyes>
+</ul>

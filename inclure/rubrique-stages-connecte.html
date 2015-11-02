@@ -1,0 +1,21 @@
+[(#REM)
+	tableau pour stocker les données du formulaires
+	- regions = les régions,
+	- competences = les compétences et les domaines recherchés (les données sont les mêmes)
+]
+	#SET{regions,#ARRAY} #SET{competences,#ARRAY}
+
+<BOUCLE_yaml(DATA){source yaml, #CHEMIN{formulaires/stages.yaml}}>
+[(#CLE|=={regions}|oui)[(#SET{data_regions, #VALEUR})]]
+[(#CLE|=={competences}|oui)[(#SET{data_competences,#VALEUR})]]
+</BOUCLE_yaml>
+
+<BOUCLE_candidatures(CANDIDATURES){tout}>
+[(#REM) on ne retient que les candidatures valable à la date du jour ]
+[(#ENV{date}|affdate{Y-m-d}|<={#DATE_FIN}|oui)
+	[(#SET_PUSH{candidatures,#ID_CANDIDATURE})]
+]
+</BOUCLE_candidatures>
+
+[(#REM) affichage des stages ]
+[(#INCLURE{fond=inclure/tableau_stages,env,candidatures=#GET{candidatures},data_regions=#GET{data_regions},data_competences=#GET{data_competences}})]

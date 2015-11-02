@@ -1,0 +1,80 @@
+[(#REM)
+	tableau pour stocker les données du formulaires
+	- r = les régions,
+	- c = les compétences et les domaines recherchés (les données sont les mêmes)
+]
+	#SET{r,#ARRAY} #SET{c,#ARRAY} #SET{saisies,#ARRAY}
+
+<BOUCLE_yaml(DATA){source yaml, #CHEMIN{formulaires/stages.yaml}}>
+[(#CLE|=={regions}|oui)[(#SET{r, #VALEUR})]]
+[(#CLE|=={competences}|oui)[(#SET{c,#VALEUR})]]
+</BOUCLE_yaml>
+
+<div id="formulaire_#FORM" class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_candidature,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li id="localisation" class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:candidatures:label_localisation_geo_inscription:></h3>
+					<ul class="fields">
+						[(#SAISIE{checkbox,regions,
+							label=<:candidatures:label_regions_inscription:>,
+							obligatoire=oui,
+							datas=#GET{r}})]
+						[(#SAISIE{input, ville_stage, label=<:candidatures:label_ville_inscription:>, explication=<:candidatures:info_saisie_ville_stage:>, class=text})]
+					</ul>
+				</fieldset>
+			</li>
+			<li id="disponibilite" class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:candidatures:label_dispo_inscription:></h3>
+					<ul class="fields enligne">
+						[(#SAISIE{date, date_debut,
+							label=<:candidatures:label_date_debut:>,
+							obligatoire=oui,
+							explication=<:candidatures:info_format_date:>})]
+						[(#SAISIE{date, date_fin,
+							label=<:candidatures:label_date_fin:>,
+							obligatoire=oui,
+							explication=<:candidatures:info_format_date:>})]
+					</ul>
+				</fieldset>
+			</li>
+			<li id="formation" class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:candidatures:label_cadre_stage:></h3>
+					<ul class="fields enligne">
+						[(#SAISIE{input,ecole,label=<:candidatures:label_ecole:>,obligatoire=oui})]
+						[(#SAISIE{input,ville_ecole,label=<:candidatures:label_ville_consultation:>})]
+						[(#SAISIE{input,diplome,label=<:candidatures:label_diplome:>,obligatoire=oui})]
+						[(#SAISIE{input,niveau,label=<:candidatures:label_diplome_niveau:>,obligatoire=oui})]
+					</ul>
+				</fieldset>
+			</li>
+			<li id="activites" class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:candidatures:label_activites_inscription:></h3>
+					<ul class="fields">
+						[(#SAISIE{checkbox,competences_offre,
+							label=<:candidatures:label_competences_offre_inscription:>,
+							obligatoire=oui,
+							datas=#GET{c}})]
+						[(#SAISIE{checkbox,competences_recherche,
+							label=<:candidatures:label_competences_recherche_inscription:>,
+							obligatoire=oui,
+							datas=#GET{c}})]
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit bouton medium' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

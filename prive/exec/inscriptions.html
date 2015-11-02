@@ -1,0 +1,19 @@
+[(#AUTORISER{voir,inscriptions})
+	<h1>Liste des inscriptions à la rubrique Stages</h1>
+
+	<div class='ajax'>
+		<INCLURE{fond=inclure/prive-liste-inscriptions,env,ajax}>
+	</div>
+
+	<!--#navigation-->
+	<div class='cadre cadre-info'>
+
+		[(#AUTORISER{voir,candidatures})
+
+			[<div>
+				<p><a href="(#URL_ECRIRE{candidatures})" class="cellule-h">Afficher les candidatures</a></p>
+			</div>]
+		]
+	</div>
+	<!--/#navigation-->
+]

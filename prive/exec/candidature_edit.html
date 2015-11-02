@@ -1,0 +1,21 @@
+#CACHE{0}
+[(#SET{id_candidature,[(#VAL{id_candidature}|_request|sinon{new})]})]
+<BOUCLE_si_autorise(CONDITION){si (#AUTORISER{modifier,candidature,#GET{id_candidature}})}>
+[(#SET{retour, #URL_ECRIRE{candidatures}})]
+<BOUCLE_numero(CANDIDATURES){id_candidature=#GET{id_candidature}}{tout}>
+[(#SET{numero, #ID_CANDIDATURE})]
+[(#SET{retour, [(#URL_ECRIRE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]})]
+</BOUCLE_numero>
+
+<BOUCLE_auteur(AUTEURS candidatures){id_auteur}{id_candidature}{tout}>
+[(#SET{auteur,#ID_AUTEUR})]
+</BOUCLE_auteur>
+
+[(#INCLURE{fond=prive/editer/candidature,
+	id_candidature=#GET{id_candidature},
+	icone_retour=[(#ENV{retour,#GET{retour}}
+	|icone{<:icone_retour:>, #CHEMIN{images/chat-24.png}, #LANG_LEFT })],
+	numero=#GET{numero},auteur=#GET{auteur}
+})]
+
+</BOUCLE_si_autorise>

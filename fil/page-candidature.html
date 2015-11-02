@@ -1,0 +1,5 @@
+<BOUCLE_fil_rubrique(RUBRIQUES){id_rubrique=10}>
+<p id="ariane">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &rarr; <a href="#URL_RUBRIQUE">[(#TITRE|couper{70})]</a></BOUCLE_ariane>[ &rarr; <a href="#URL_RUBRIQUE">(#TITRE|couper{70})</a>] &rarr; <a href="[(#URL_PAGE{profil}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:candidatures:info_votre_profil:></a> &rarr; <strong class="on">[(#ENV{id_candidature}|?{<:candidatures:info_modifier_candidature:>,<:candidatures:info_depot_candidature:>})]</strong>
+</p>
+</BOUCLE_fil_rubrique>

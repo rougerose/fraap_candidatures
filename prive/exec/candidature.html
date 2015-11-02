@@ -1,0 +1,39 @@
+<BOUCLE_si_autorise(CONDITION){si (#ID_CANDIDATURE|intval|et{#AUTORISER{voir,candidature,#ID_CANDIDATURE}})}>
+<BOUCLE_candidature(CANDIDATURES){id_candidature}{tout}>
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,candidature,#ID_CANDIDATURE})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{candidature_edit}
+				|parametre_url{id_candidature,#ID_CANDIDATURE}
+				|parametre_url{retour,#SELF}
+				|icone{modifier, #CHEMIN{images/candidatures-16.png}, #LANG_RIGHT, edit.gif})]
+		</div>
+	]
+	<BOUCLE_auteur(AUTEURS candidatures){id_auteur}{id_candidature}{tout}>
+	<h1>Candidature de #PRENOM #NOM</h1>
+	</BOUCLE_auteur>
+
+
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,candidature,
+				id_objet,#ID_CANDIDATURE,
+				contexte,[(#ARRAY{
+					id_candidature,#ID_CANDIDATURE})]})],
+			data,[(#INCLURE{fond=prive/contenu/candidature,id=#ID_CANDIDATURE})]})]})]
+	</div>
+</div>
+
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+[<div class='cadre cadre-info'>
+	(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,candidature,
+			id,#ID_CANDIDATURE})],
+		data,''})]})
+</div>]
+<!--/#navigation-->
+</BOUCLE_candidature>
+</BOUCLE_si_autorise>

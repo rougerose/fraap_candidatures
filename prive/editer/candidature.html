@@ -1,0 +1,9 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+        #ENV**{icone_retour}
+        [<:chats:info_modifier_chat:>
+        <h1>(#ENV{numero,<:chats:texte_nouveau_chat:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_CANDIDATURE{#ENV{id_candidature,new},#GET{auteur},#ENV{redirect}}
+
+</div>

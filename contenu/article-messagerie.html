@@ -1,0 +1,55 @@
+<BOUCLE_contenu_article(ARTICLES){id_article}>
+<div id="extra-objet-conteneur">
+	[<div id="logo-objet-conteneur">
+		(#LOGO_ARTICLE|inserer_attribut{class,logo-objet}|image_reduire{200,0})
+	</div><!-- #logo-objet-conteneur -->]
+
+	<div id="info-publi-objet-conteneur">
+		[(#INCLURE{fond=inclure/navigation-messagerie,env})]
+
+		[(#REM) [(#MODELE{socialtags})] ]
+
+	</div><!-- #info-publi-objet-conteneur -->
+
+</div><!-- #extra-objet -->
+
+[<div id="chapo-conteneur" class="introduction #EDIT{chapo}">
+	(#CHAPO|image_reduire{220,0})
+</div><!-- #chapo-conteneur .introduction -->]
+
+<div class="contenu clearfix">
+	<p class="retour-profil"><a class="bouton medium" href="[(#URL_PAGE{profil}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:candidatures:retour_profil:></a></p>
+	<div class="contenu-principal">
+		<div class="surlignable">
+			[<div class="#EDIT{texte} texte textecourant">(#TEXTE|image_reduire{220,0})</div>]
+		</div><!-- .surlignable -->
+
+		[(#REM)
+			Afficher le formulaire pour écrire un message.
+			Le formulaire messages reçus/envoyés sont gérés directement dans le champ texte de l'article.
+		]
+		[<div class="texte textecourant">
+			(#ENV{repondre}|oui)
+			[(#FORMULAIRE_ECRIRE_MESSAGE{art510,#ENV{destinataire}})]
+		</div>]
+		[<div class="texte textecourant">
+			(#ENV{destinataire}|oui)
+			[(#FORMULAIRE_ECRIRE_MESSAGE{art510,#ENV{destinataire}})]
+		</div>]
+
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+		[<div class="ps textecourant">
+			<h2 class="h2 spip"><:info_ps:></h2>
+			<div class="#EDIT{ps} surlignable">(#PS|image_reduire{220,0})</div>
+		</div>]
+
+		[<div class="notes surlignable textecourant"><h2 class="h2 spip pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+	</div><!-- .contenu-principal -->
+
+	[<div class="contenu-secondaire">
+		(#INCLURE{fond=inclure/tabs,id_article})
+	</div><!-- .contenu-secondaire -->]
+</div><!-- .contenu -->
+
+</BOUCLE_contenu_article>

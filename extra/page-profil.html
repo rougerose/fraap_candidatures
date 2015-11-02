@@ -1,0 +1,108 @@
+	[(#REM)
+		tableaux des candidatures selon leur statut (poubelle, prop, publiees)
+		+ un tableau de l'ensemble des candidatures
+	]
+		#SET{c_poubelle,#ARRAY} #SET{c_publiee,#ARRAY} #SET{c_prop,#ARRAY}
+		#SET{c,#ARRAY}
+
+	[(#REM)
+		tableau pour stocker les données du formulaires
+		- regions = les régions,
+		- competences = les compétences et les domaines recherchés (les données sont les mêmes)
+	]
+		#SET{regions,#ARRAY} #SET{competences,#ARRAY}
+
+	<BOUCLE_yaml(DATA){source yaml, #CHEMIN{formulaires/stages.yaml}}>
+	[(#CLE|=={regions}|oui)[(#SET{regions, #VALEUR})]]
+	[(#CLE|=={competences}|oui)[(#SET{competences,#VALEUR})]]
+	</BOUCLE_yaml>
+
+[(#REM) autorisation d'afficher les contenus à partir de l'identifiant de session ]
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+
+	<BOUCLE_autorisation(CONDITION){si #SESSION{id_auteur}|=={#ID_AUTEUR}|et{#SESSION{activite}}}>
+		[(#REM) les candidatures poubelle ]
+		<BOUCLE_c_poubelle(CANDIDATURES)
+			{id_auteur}{tout}{statut=poubelle}>#SET_PUSH{c_poubelle,#ID_CANDIDATURE}</BOUCLE_c_poubelle>
+			#SET{t_poubelle,#TOTAL_BOUCLE}<//B_c_poubelle>
+
+		<BOUCLE_c_publiee(CANDIDATURES)
+			{id_auteur}{tout}{statut=publie}>#SET_PUSH{c_publiees,#ID_CANDIDATURE}</BOUCLE_c_publiee>
+			#SET{t_publiee,#TOTAL_BOUCLE}<//B_c_publiee>
+
+		<BOUCLE_c_prop(CANDIDATURES)
+			{id_auteur}{tout}{statut=prop}>#SET_PUSH{c_prop,#ID_CANDIDATURE}</BOUCLE_c_prop>
+			#SET{t_prop,#TOTAL_BOUCLE}<//B_c_prop>
+
+		[(#REM) total des candidatures enregistrées ]
+		[(#SET{total_c,[(#GET{t_publiee}|plus{#GET{t_poubelle}|plus{#GET{t_prop}}})]})]
+
+		[(#REM) toutes les candidatures]
+		[(#SET_MERGE{c,#GET{c_poubelle},#GET{c_publiees}})] [(#SET_MERGE{c,#GET{c_prop}})]
+
+		<div id="extra">
+			<div id="gestion-messages">
+				<h2><:candidatures:titre_messages:></h2>
+				[(#INCLURE{fond=inclure/navigation-messagerie,env})]
+			</div><!-- #gestion-messages -->
+
+			[(#REM) s'il le visiteur est un étudiant, on affiche rien à propos des candidatures ]
+			<BOUCLE_test_etudiant(CONDITION){si #ACTIVITE|=={2}|oui}>
+			<div id="gestion-candidatures">
+				<h2><:candidatures:titre_candidatures:></h2>
+				[<p class="compteur-candidatures">(#GET{total_c}|singulier_ou_pluriel{candidatures:candidature_enregistree,candidatures:candidatures_enregistrees,nb})</p>]
+				<div class="actions clearfix">
+					<ul>
+						<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt ajouter" title="<:candidatures:label_bouton_ajouter_candidature:>"><:candidatures:label_bouton_ajouter_candidature:></a></li>
+					</ul>
+					<p></p>
+				</div><!-- .actions -->
+				<B_candidatures>
+				<ol id="accordeon-candidatures">
+					<BOUCLE_candidatures(CANDIDATURES){id_candidature IN #GET{c}}{par date}>
+					#SET{reg,#REGIONS|unserialize} #SET{offres,#COMPETENCES_OFFRE|unserialize} #SET{recherches,#COMPETENCES_RECHERCHE|unserialize}
+					<li>
+						<h3><span class="uiHeader"><:candidatures:candidature_numero:> #COMPTEUR_BOUCLE</span></h3>
+						<div class="bloc">
+							<p>
+								[<:candidatures:periode_du_maj:> (#DATE_DEBUT|affdate{d/m/Y})[ <:candidatures:periode_au_min:> (#DATE_FIN|affdate{d/m/Y})]]
+							</p>
+							<B_regions>
+							<p>
+								<BOUCLE_regions(POUR){tableau #GET{reg}}>
+								[[(#COMPTEUR_BOUCLE|=={1}|non) / ](#GET{regions}|table_valeur{#VALEUR})]
+								</BOUCLE_regions>
+							</p>
+							</B_regions>
+							<B_offres>
+							<p>
+								<BOUCLE_offres(POUR){tableau #GET{offres}}>
+								[[(#COMPTEUR_BOUCLE|=={1}|non) / ](#GET{competences}|table_valeur{#VALEUR})]
+								</BOUCLE_offres>
+							</p>
+							</B_offres>
+							<B_recherches>
+							<p>
+								<BOUCLE_recherches(POUR){tableau #GET{recherches}}>
+								[[(#COMPTEUR_BOUCLE|=={1}|non) / ](#GET{competences}|table_valeur{#VALEUR})]
+								</BOUCLE_recherches>
+							</p>
+							</B_recherches>
+							<div class="actions clearfix">
+								<ul>
+									<li><a href="[(#URL_ACTION_AUTEUR{supprimer_candidature,#ID_CANDIDATURE,#SELF})]" class="bt supprimer" title="<:candidatures:label_bouton_supprimer_candidature:>"><:candidatures:label_bouton_supprimer_candidature:></a></li>
+									<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt modifier" title="<:candidatures:label_bouton_modifier_candidature:>"><:candidatures:label_bouton_modifier_candidature:></a></li>
+								</ul>
+							</div><!-- .actions -->
+						</div><!-- .bloc -->
+					</li>
+					</BOUCLE_candidatures>
+				</ol>
+				</B_candidatures>
+				<p><:candidatures:pas_de_candidature:></p>
+				<//B_candidatures>
+			</div><!-- #gestion-candidatures -->
+			</BOUCLE_test_etudiant>
+		</div><!-- #extra -->
+	</BOUCLE_autorisation>
+</BOUCLE_auteur>

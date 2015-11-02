@@ -1,0 +1,16 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout_voir}>
+[<div class="texte">
+	(#TEXTE)
+</div><!-- .texte -->]
+
+<ul id="stages-aiguillage" class="clearfix">
+	<li class="visite-habitue grid_6 alpha filets2px">
+		<h3>Déjà inscrit ?</h3>
+		<p><a href="[(#URL_PAGE{login}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{url,[(#SELF|entites_html)]})]" class="bouton medium"><:candidatures:label_bouton_identification:></a></p>
+	</li>
+	<li class="visite-nouveau grid_6 omega filets2px">
+		<h3>Première visite ?</h3>
+		<p><a href="[(#URL_PAGE{inscription}|parametre_url{id_rubrique,#ENV{id_rubrique}})]" class="bouton medium"><:candidatures:label_bouton_inscription:></a></p>
+	</li>
+</ul>
+</BOUCLE_rubrique>

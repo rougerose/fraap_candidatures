@@ -1,0 +1,56 @@
+[(#REM)	on récupère les visiteurs (6forum ou nouveau) ]
+#SET{visiteurs,#ARRAY}
+
+<BOUCLE_tableau_visiteurs(AUTEURS){statut IN 6forum,nouveau}{tout}>[(#SET{visiteurs,#GET{visiteurs}|push{#ID_AUTEUR}})]</BOUCLE_tableau_visiteurs>
+
+<div>
+	<B_inscriptions>
+	<p class="verdana2">
+		[(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:criteres_resultat,candidatures:criteres_resultats,nb})]
+		<BOUCLE_artistes(AUTEURS){id_auteur IN #GET{visiteurs}}{tout}{activite=1}></BOUCLE_artistes>
+		([(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:nb-artiste,candidatures:nb-artistes,nb}|sinon{0 artiste})&nbsp;;]
+		<//B_artistes>
+		<BOUCLE_etudiants(AUTEURS){id_auteur IN #GET{visiteurs}}{tout}{activite=2}></BOUCLE_etudiants>
+		[(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:nb-etudiant,candidatures:nb-etudiants,nb}|sinon{0 étudiant})]
+		<//B_etudiants>
+		<BOUCLE_inconnus(AUTEURS){id_auteur IN #GET{visiteurs}}{tout}{activite=0}></BOUCLE_inconnus>
+		[; (#GRAND_TOTAL|singulier_ou_pluriel{candidatures:nb-inconnu,candidatures:nb-inconnus,nb})])
+		<//B_inconnus>
+	</p>
+
+	<div class='pagination tri'>
+		[(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:medias:par_tri_croissant:>}}) |]
+		[(#TRI{'>',#CHEMIN{img_pack/tri_desc-16.png}|tag_img{<:medias:par_tri_decroissant:>}}) |]
+		[(#TRI{nom,Nom}) |]
+		[(#TRI{prenom,Prénom}) |]
+		[(#TRI{activite,Activité}) |]
+	</div>
+
+	[<p class="pagination">(#PAGINATION{page})</p>]
+	<table id="candidatures" class="verdana1" style="width:100%;" cellpadding="0" cellspacing="0">
+		<thead>
+			<tr class="titrem arial2"><th>Nom</th><th>Prénom</th><th>E-mail</th><th>Activité</th><th>Candidatures enregistrées</th>
+		</thead>
+		<tbody>
+			<BOUCLE_inscriptions(AUTEURS){tout}{id_auteur IN #GET{visiteurs}}{tri nom}{pagination 30}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td>#NOM</td>
+				<td>[(#PRENOM|sinon{pas de prénom})]</td>
+				<td>#EMAIL</td>
+				<td>
+					[(#ACTIVITE|=={1}|oui)<:candidatures:type_1:>]
+					[(#ACTIVITE|=={2}|oui)<:candidatures:type_2:>]
+					[(#ACTIVITE|non)non renseigné]
+				</td>
+				<td>
+					<BOUCLE_compteur_inscriptions(CANDIDATURES){tout}{id_auteur}></BOUCLE_compteur_inscriptions>
+					[(#TOTAL_BOUCLE|singulier_ou_pluriel{candidatures:candidature,candidatures:candidatures,nb}|sinon{aucune candidature})]
+					<//B_compteur_inscriptions>
+				</td>
+			</tr>
+			</BOUCLE_inscriptions>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{page})</p>]
+	</B_inscriptions>
+</div>

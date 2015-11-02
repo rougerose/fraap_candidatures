@@ -1,0 +1,61 @@
+[(#REM)
+	tableau pour stocker les données du formulaires
+	- regions = les régions,
+	- competences = les compétences et les domaines recherchés (les données sont les mêmes)
+]
+	#SET{regions,#ARRAY} #SET{competences,#ARRAY}
+
+<BOUCLE_yaml(DATA){source yaml, #CHEMIN{formulaires/stages.yaml}}>
+[(#CLE|=={regions}|oui)[(#SET{data_regions, #VALEUR})]]
+[(#CLE|=={competences}|oui)[(#SET{data_competences,#VALEUR})]]
+</BOUCLE_yaml>
+
+
+<BOUCLE_afficher_contenu(CANDIDATURES){id_candidature=#ENV{id}}{tout}>
+
+#SET{reg,#REGIONS|unserialize}
+#SET{comp,#COMPETENCES_OFFRE|unserialize}
+#SET{rech,#COMPETENCES_RECHERCHE|unserialize}
+
+<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
+        <div class='label'>Du</div>
+        <div dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>[(#DATE_DEBUT|affdate{d/m/Y})]</div>
+</div>
+<div class="champ contenu_date_fin[ (#DATE_FIN*|strlen|?{'',vide})]">
+        <div class='label'>Au</div>
+        <div dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>[(#DATE_FIN|affdate{d/m/Y})]</div>
+</div>
+<div class="champ contenu_regions[ (#REGIONS*|strlen|?{'',vide})]">
+        <div class='label'>Régions</div>
+        <div dir='#LANG_DIR' class='regions'><BOUCLE_regions(POUR){tableau #GET{reg}}{', '}>[(#GET{data_regions}|table_valeur{#VALEUR})]</BOUCLE_regions></div>
+</div>
+<div class="champ contenu_ville[ (#VILLE*|strlen|?{'',vide})]">
+        <div class='label'>Ville</div>
+        <div dir='#LANG_DIR' class='#EDIT{ville} ville'>#VILLE</div>
+</div>
+<div class="champ contenu_ecole[ (#ECOLE*|strlen|?{'',vide})]">
+        <div class='label'>École</div>
+        <div dir='#LANG_DIR' class='#EDIT{ecole} ville'>#ECOLE</div>
+</div>
+<div class="champ contenu_ville_ecole[ (#VILLE_ECOLE*|strlen|?{'',vide})]">
+        <div class='label'>Ville (école)</div>
+        <div dir='#LANG_DIR' class='#EDIT{ville_ecole} ville_ecole'>#VILLE_ECOLE</div>
+</div>
+<div class="champ contenu_diplome[ (#DIPLOME*|strlen|?{'',vide})]">
+        <div class='label'>Diplome</div>
+        <div dir='#LANG_DIR' class='#EDIT{diplome} diplome'>#DIPLOME</div>
+</div>
+<div class="champ contenu_niveau[ (#NIVEAU*|strlen|?{'',vide})]">
+        <div class='label'>Niveau</div>
+        <div dir='#LANG_DIR' class='#EDIT{niveau} niveau'>#NIVEAU</div>
+</div>
+<div class="champ contenu_competences[ (#COMPETENCES_OFFRE*|strlen|?{'',vide})]">
+        <div class='label'>Compétences</div>
+        <div dir='#LANG_DIR' class='competences'><BOUCLE_offres(POUR){tableau #GET{comp}}{', '}>[(#GET{data_competences}|table_valeur{#VALEUR})]</BOUCLE_offres></div>
+</div>
+<div class="champ contenu_recherches[ (#COMPETENCES_RECHERCHE*|strlen|?{'',vide})]">
+        <div class='label'>Recherches</div>
+        <div dir='#LANG_DIR' class='recherches'><BOUCLE_recherches(POUR){tableau #GET{rech}}{', '}>[(#GET{data_competences}|table_valeur{#VALEUR})]</BOUCLE_recherches></div>
+</div>
+
+</BOUCLE_afficher_contenu>

@@ -1,0 +1,2 @@
+[(#REM) surcharge fichier plugin messagerie : pour cacher le nom du destinataire ]
+<BOUCLE_dest(AUTEURS){id_auteur IN #ENV*{destinataires}}{tout}><input type='hidden' name='destinataires[]' value='#ID_AUTEUR' /></BOUCLE_dest>

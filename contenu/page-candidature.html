@@ -1,0 +1,4 @@
+<div class="conteneur-formulaire[ couleurID(#ENV{id_rubrique})]">
+	<p class="retour-profil"><a class="bouton medium" href="[(#URL_PAGE{profil}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:candidatures:retour_profil:></a></p>
+	#FORMULAIRE_EDITER_CANDIDATURE{#ENV{id_candidature,new},#SESSION{id_auteur}}
+</div><!-- .conteneur-formulaire -->
