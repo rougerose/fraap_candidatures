@@ -1,7 +1,7 @@
 <entree>
-	<nom><:candidatures:menu_connexion_nom:></nom>
+	<nom><:fraap_candidatures:menu_connexion_nom:></nom>
 	<rang>10</rang>
-	<description><:candidatures:menu_connexion_description:></description>
+	<description><:fraap_candidatures:menu_connexion_description:></description>
 	<icone>images/menus_logout.png</icone>
 	<parametre nom="titre" class="multilang" label="menus:entree_titre_prive" />
 	<parametre nom="titre_connecter" class="multilang" label="menus:entree_titre_connecter" />

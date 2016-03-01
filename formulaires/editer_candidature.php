@@ -32,7 +32,7 @@ function formulaires_editer_candidature_verifier_dist($id_candidature='new',$id_
 	$date_fin = verifier_corriger_date_saisie('fin',$horaire,$erreurs);
 
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
-	$erreurs['date_fin'] = _T('candidatures:erreur_date_avant_apres');
+	$erreurs['date_fin'] = _T('fraap_candidatures:erreur_date_avant_apres');
 
 	return $erreurs;
 }
@@ -46,7 +46,7 @@ function formulaires_editer_candidature_traiter_dist($id_candidature='new',$id_a
 	}
 	else {
 	//	spip_log('candidature '.$id_candidature.' / retour '.$retour.' / id '.$id,'journal');
-		($id_candidature == 'new') ? $res['message_ok'] = _T('candidatures:message_candidature_enregistree') : $res['message_ok'] = _T('candidatures:message_candidature_modifiee');
+		($id_candidature == 'new') ? $res['message_ok'] = _T('fraap_candidatures:message_candidature_enregistree') : $res['message_ok'] = _T('fraap_candidatures:message_candidature_modifiee');
 		if ($retour) {
 			$retour = parametre_url($retour,'id_candidature',$id_candidature);
 			$res['redirect'] = $retour;

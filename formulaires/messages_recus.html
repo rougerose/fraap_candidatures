@@ -1,10 +1,9 @@
 <div class='ajax'>
-<BOUCLE_recus(MESSAGES spip_auteurs_messages){auteurs_messages.id_auteur=#SESSION{id_auteur}}{auteurs_messages.vu!=pou}{pagination 1}{!par date_heure}>
+<BOUCLE_recus(MESSAGES auteurs_liens){auteurs_liens.id_auteur=#SESSION{id_auteur}}{auteurs_liens.vu!=poub}{auteurs_liens.objet=message}{pagination 1}{!par date_heure}>
 <div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
 <br class='bugajaxie' />
 [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
 [<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
-[(#ENV{editable})
 <form method='post' action='#ENV{action}#formulaire_#ENV{form}#ENV{id}' class='ajax'>
 
 [(#REM) declarer les hidden qui declencheront le service du formulaire
@@ -26,26 +25,25 @@ parametre : url d'action ]
 <option value='unread'><:ecrire_message:selection_non_lus:></option>
 <option value='all'><:ecrire_message:selection_tous:></option>
 </select>
-<input type="submit" name='effacer' class="submit bouton xsmall" value="<:ecrire_message:label_effacer:>" />
-<input type="submit" name='marquer_lus' class="submit bouton xsmall" value="<:ecrire_message:label_marquer_lus:>" />
-<input type="submit" name='marquer_non_lus' class="submit bouton xsmall" value="<:ecrire_message:label_marquer_non_lus:>" />
+<input type="submit" name='effacer' class="submit" value="<:ecrire_message:label_effacer:>" />
+<input type="submit" name='marquer_lus' class="submit" value="<:ecrire_message:label_marquer_lus:>" />
+<input type="submit" name='marquer_non_lus' class="submit" value="<:ecrire_message:label_marquer_non_lus:>" />
 </li></ul>
 </fieldset>
 [(#INCLURE{fond=liste/messages_recus}{ajax}{id_auteur=#SESSION{id_auteur}}{id_message=#EVAL{_request('id_message')}}{date_last=#DATE_HEURE}{nombre=#GRAND_TOTAL}{env})]
 </form>
-]
 </div>
-<script type='text/javascript'>(function($){
-	$(function(){
-		$('select#selection').change(function(){
-			var val = $(this).attr('value');
-			if ((val=='none') || (val=='read') || (val=='unread')) $('ul.messages.recus div.message input[type=checkbox]').attr('checked','');
-			if (val=='read') $('ul.messages.recus div.message').not('.new').find('input[type=checkbox]').attr('checked','checked');
-			if (val=='unread') $('ul.messages.recus div.message.new input[type=checkbox]').attr('checked','checked');
-			if (val=='all') $('ul.messages.recus div.message input[type=checkbox]').attr('checked','checked');
-		});
-	});
-}(jQuery));
+
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $('select#selection').change(function(){
+            var val = $(this).val();
+            if ((val=='none') || (val=='read') || (val=='unread')) $('ul.recus div.message input[type=checkbox]').prop('checked',false);
+            if (val=='read') $('ul.recus div.message').not('.new').find('input[type=checkbox]').prop('checked',true);
+            if (val=='unread') $('ul.recus div.message.new input[type=checkbox]').prop('checked',true);
+            if (val=='all') $('ul.recus div.message input[type=checkbox]').prop('checked',true);
+        });
+    });
 </script>
 </BOUCLE_recus>
 <:messagerie:aucun_message_recu:>

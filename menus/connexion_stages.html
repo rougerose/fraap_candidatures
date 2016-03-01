@@ -1,0 +1,12 @@
+[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:fraap_candidatures:menu_connexion_nom:>})]})]
+[(#SET{titre_connecter,[(#ENV*{titre_connecter}|typo|sinon{<:lien_connecter:>})]})]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"> </div>
+]
+[(#ENV{appel_menu}|oui)
+	[(#SESSION{id_auteur}|>{0}|oui)
+		[(#INCLURE{fond=inclure/menu_connexion_stages_contenu,env})]
+	]
+]

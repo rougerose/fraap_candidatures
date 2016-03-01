@@ -8,28 +8,28 @@
 		<ul>
 			<li class="fieldset">
 				<fieldset>
-					<h3 class="legend"><:candidatures:legende_identite:></h3>
+					<h3 class="legend"><:fraap_candidatures:legende_identite:></h3>
 					<ul class="fields">
 						<li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-							<label for="nom"><:candidatures:nom:></label>[
+							<label for="nom"><:fraap_candidatures:nom:></label>[
 							<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
 							<input type="text" name="nom" value="#ENV{nom}" id="nom" class="text">
 						</li>
 						<li class="editer_prenom obligatoire[ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
-							<label for="prenom"><:candidatures:prenom:></label>[
+							<label for="prenom"><:fraap_candidatures:prenom:></label>[
 							<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prenom})</span>]
 							<input type="text" name="prenom" value="#ENV{prenom}" id="prenom" class="text">
 							<input type="hidden" name="cextra_prenom" value="1">
 						</li>
 						<li class="editer_activite[ (#ENV**{erreurs}|table_valeur{activite}|oui)erreur]">
-							<label for="activite"><:candidatures:label_activite:></label>[
+							<label for="activite"><:fraap_candidatures:label_activite:></label>[
 							<span class="erreur_message">(#ENV**{erreurs}|table_valeur{activite})</span>]
 							<select name="activite" id="activite">
 								<option value="1"[ selected="(#ENV{activite}|=={1}|oui)selected"]>
-									<:candidatures:type_1:>
+									<:fraap_candidatures:type_1:>
 								</option>
 								<option value="2"[ selected="(#ENV{activite}|=={2}|oui)selected"]>
-									<:candidatures:type_2:>
+									<:fraap_candidatures:type_2:>
 								</option>
 							</select>
 							<input type="hidden" name="cextra_activite" value="1">
@@ -44,7 +44,7 @@
 			</li>
 			<li class="fieldset">
 				<fieldset>
-					<h3 class="legend"><:candidatures:identifiants_connexion:></h3>
+					<h3 class="legend"><:fraap_candidatures:identifiants_connexion:></h3>
 					<ul class="fields">
 						<li class='editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
 							<label for='new_pass'><:entree_nouveau_passe:></label>[

@@ -1,0 +1,20 @@
+<paquet
+    prefix="fraap_candidatures"
+    version="1.0.0"
+    etat="test"
+    categorie="squelette"
+    compatibilite="[3.0.0;3.0.*]"
+    logo="images/candidatures-128.png"
+>
+    <nom>Fraap: interface publique et privée de gestion des candidatures de stages</nom>
+    <auteur lien="http://rouge-rose.net">Christophe Le Drean</auteur>
+    <menu nom="candidatures" parent="menu_edition" titre="candidatures:stages" icone="images/candidatures-128.png" />
+    <pipeline nom="declarer_tables_interfaces" inclure="base/fraap_candidatures.php" />
+    <pipeline nom="insert_head" inclure="fraap_candidatures_pipelines.php" />
+    <pipeline nom="insert_head_prive" inclure="fraap_candidatures_pipelines.php" />
+    <necessite nom="accesrestreint" compatibilite="[3.14.1;]" />
+    <necessite nom="menus" compatibilite="[1.5.15;]" />
+    <necessite nom="saisies" compatibilite="[2.5.30;]" />
+    <necessite nom="messagerie" compatibilite="[3.1.4;]" />
+    <necessite nom="organiseur" compatibilite="[0.8.5;[" />
+</paquet>

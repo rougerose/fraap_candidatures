@@ -5,7 +5,7 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 
 [(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-	<h2><:candidatures:info_modifier_profil:></h2>
+	<h2><:fraap_candidatures:info_modifier_profil:></h2>
 	[<div class="ajax">
 		(#FORMULAIRE_EDITER_PROFIL{#ID_AUTEUR,#SELF})
 	</div>]
@@ -15,13 +15,13 @@
 
 	[(#SET{url_profil,[(#URL_PAGE{profil}|parametre_url{id_auteur,#SESSION{id_auteur}})]})]
 
-	<p><:candidatures:pas_autorise{url_profil=#GET{url_profil}}:></p>
+	<p><:fraap_candidatures:pas_autorise{url_profil=#GET{url_profil}}:></p>
 ]
 </BOUCLE_auteur>
 </B_auteur>
 [(#REM) pas d'id_auteur dans l'environnement, mais il existe des infos de session ]
 [(#SESSION{id_auteur}|oui)
-	<h2><:candidatures:info_modifier_profil:></h2>
+	<h2><:fraap_candidatures:info_modifier_profil:></h2>
 	[<div class="ajax">
 		(#FORMULAIRE_EDITER_PROFIL{[(#SESSION{id_auteur})],#SELF})
 	</div>]
@@ -30,6 +30,6 @@
 [(#REM) sinon il faut s'identifier à nouveau ]
 [(#SESSION{id_auteur}|non)
 	[(#SET{lien,[(#URL_PAGE{identification}|parametre_url{id_rubrique,10}|parametre_url{url,#GET{url}})]})]
-	<p><:candidatures:lien_page_identification{url=#GET{lien}}:>
+	<p><:fraap_candidatures:lien_page_identification{url=#GET{lien}}:>
 ]
 <//B_auteur>
