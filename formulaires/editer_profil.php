@@ -24,7 +24,7 @@ function formulaires_editer_profil_verifier_dist($id_auteur,$retour='') {
 	$pass2 = _request('new_pass2');
 
 	foreach(array('nom','prenom','activite','email') as $obligatoire)
-		if (!_request($obligatoire)) $erreurs[$obligatoire] = _T('candidatures:form_champ_obligatoire');
+		if (!_request($obligatoire)) $erreurs[$obligatoire] = _T('fraap_candidatures:form_champ_obligatoire');
 
 	if ($email AND !email_valide($email)) {
 		$erreurs['email'] = _T('form_email_non_valide');
@@ -32,13 +32,13 @@ function formulaires_editer_profil_verifier_dist($id_auteur,$retour='') {
 
 	if ($p = _request('new_pass')) {
 		if (strlen($p) < 6) {
-			$erreurs['new_pass'] = _T('candidatures:pass_trop_court');
+			$erreurs['new_pass'] = _T('fraap_candidatures:pass_trop_court');
 		} elseif ($p != _request('new_pass2')) {
-			$erreurs['new_pass2'] = _T('candidatures:pass_pas_identique');
+			$erreurs['new_pass2'] = _T('fraap_candidatures:pass_pas_identique');
 		}
 	}
 	if(!$mdp && $mdp2){
-		$erreurs['new_pass']= _T('candidatures:pass_pas_identique');
+		$erreurs['new_pass']= _T('fraap_candidatures:pass_pas_identique');
 	}
 
 	return $erreurs;
@@ -71,11 +71,11 @@ function formulaires_editer_profil_traiter_dist($id_auteur,$retour='') {
 
 	if ($id_auteur = intval($id_auteur)) {
 		sql_updateq('spip_auteurs', $res , "id_auteur=$id_auteur");
-		$res['message_ok'] = _T('candidatures:form_profil_modifie');
-		
+		$res['message_ok'] = _T('fraap_candidatures:form_profil_modifie');
+
 
 	}
-	else { $res['message_erreur'] = _T('candidatures:form_probleme'); }
+	else { $res['message_erreur'] = _T('fraap_candidatures:form_probleme'); }
 	return $res;
 }
 

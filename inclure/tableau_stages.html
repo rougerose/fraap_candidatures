@@ -158,20 +158,20 @@
 		<ul class="clearfix">
 			<li class="info-resultats">
 				[(#GET{candidatures}|count|>{0}|?{
-					[(#GET{candidatures}|count|singulier_ou_pluriel{candidatures:criteres_resultat,candidatures:criteres_resultats,nb})]
+					[(#GET{candidatures}|count|singulier_ou_pluriel{fraap_candidatures:criteres_resultat,fraap_candidatures:criteres_resultats,nb})]
 					,
-					<:candidatures:criteres_pas_de_resultat:>
+					<:fraap_candidatures:criteres_pas_de_resultat:>
 				})]
 			</li>
 			<li>
-				<a href="#formulaire_tri_stages" title="<:candidatures:label_bouton_trier_candidatures:>" class="bt trier">
-					<:candidatures:label_bouton_trier_candidatures:>
+				<a href="#formulaire_tri_stages" title="<:fraap_candidatures:label_bouton_trier_candidatures:>" class="bt trier">
+					<:fraap_candidatures:label_bouton_trier_candidatures:>
 				</a>
 			</li>
 			[(#SESSION{activite}|=={2}|oui)
 			<li>
-				<a href="#URL_PAGE{candidature}" title="<:candidatures:label_bouton_ajouter_candidature:>" class="bt ajouter">
-					<:candidatures:label_bouton_ajouter_candidature:>
+				<a href="#URL_PAGE{candidature}" title="<:fraap_candidatures:label_bouton_ajouter_candidature:>" class="bt ajouter">
+					<:fraap_candidatures:label_bouton_ajouter_candidature:>
 				</a>
 			</li>
 			]
@@ -181,17 +181,17 @@
 	<BOUCLE_stages_tri_2(CONDITION){si #GET{stages_tri}}>
 	<div id="criteres-utilisateur">
 		<dl>
-			<dt><:candidatures:vos_criteres_tri:></dt>
+			<dt><:fraap_candidatures:vos_criteres_tri:></dt>
 
-			[<dd id="date_debut" class="formTypeInput clearfix"><span class="label"><:candidatures:label_date_debut:> </span><span class="data-env">(#ENV{date_debut})</span></dd>]
+			[<dd id="date_debut" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_date_debut:> </span><span class="data-env">(#ENV{date_debut})</span></dd>]
 
-			[<dd id="date_fin" class="formTypeInput clearfix"><span class="label"><:candidatures:label_date_fin:> </span><span class="data-env">(#ENV{date_fin})</span></dd>]
+			[<dd id="date_fin" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_date_fin:> </span><span class="data-env">(#ENV{date_fin})</span></dd>]
 
 			<BOUCLE_test_regions(CONDITION){si #ENV{regions}}>
 			[(#SET{compteur_regions,#ENV{regions}|count})]
 			<B_choix_regions>
 			<dd class="formTypeCheckbox clearfix">
-				<span class="label"><:candidatures:label_regions_consultation_abrev:></span>
+				<span class="label"><:fraap_candidatures:label_regions_consultation_abrev:></span>
 				<BOUCLE_choix_regions(POUR){tableau #GET{data_regions}}>
 				[<span id="regions_#CLE" class="data-env">(#ENV{regions}|find{#CLE}|oui)#VALEUR</span> ]
 				</BOUCLE_choix_regions>
@@ -199,21 +199,21 @@
 			</B_choix_regions>
 			</BOUCLE_test_regions>
 
-			[<dd id="ville_stage" class="formTypeInput clearfix"><span class="label"><:candidatures:label_ville_consultation:> </span><span class="data-env">(#ENV{ville_stage})</span></dd>]
+			[<dd id="ville_stage" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_ville_consultation:> </span><span class="data-env">(#ENV{ville_stage})</span></dd>]
 
-			[<dd id="ecole" class="formTypeInput clearfix"><span class="label"><:candidatures:label_ecole:> </span><span class="data-env">(#ENV{ecole})</span></dd>]
+			[<dd id="ecole" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_ecole:> </span><span class="data-env">(#ENV{ecole})</span></dd>]
 
-			[<dd id="ville_ecole" class="formTypeInput clearfix"><span class="label"><:candidatures:label_ville_ecole_tri:> </span><span class="data-env">(#ENV{ville_ecole})</span></dd>]
+			[<dd id="ville_ecole" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_ville_ecole_tri:> </span><span class="data-env">(#ENV{ville_ecole})</span></dd>]
 
-			[<dd id="diplome" class="formTypeInput clearfix"><span class="label"><:candidatures:label_diplome:> </span><span class="data-env">(#ENV{diplome})</span></dd>]
+			[<dd id="diplome" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_diplome:> </span><span class="data-env">(#ENV{diplome})</span></dd>]
 
-			[<dd id="niveau" class="formTypeInput clearfix"><span class="label"><:candidatures:label_diplome_niveau:> </span><span class="data-env">(#ENV{niveau})</span></dd>]
+			[<dd id="niveau" class="formTypeInput clearfix"><span class="label"><:fraap_candidatures:label_diplome_niveau:> </span><span class="data-env">(#ENV{niveau})</span></dd>]
 
 			<BOUCLE_test_competences(CONDITION){si #ENV{competences_offre}}>
 			[(#SET{compteur_competences,#ENV{competences_offre}|count})]
 			<B_choix_competences>
 			<dd class="formTypeCheckbox clearfix">
-				<span class="label"><:candidatures:label_competences_offre_consultation_tri:></span>
+				<span class="label"><:fraap_candidatures:label_competences_offre_consultation_tri:></span>
 				<BOUCLE_choix_competences(POUR){tableau #GET{data_competences}}>
 				[<span id="competences_offre_#CLE" class="data-env">(#ENV{competences_offre}|find{#CLE}|oui)#VALEUR</span> ]
 				</BOUCLE_choix_competences>
@@ -225,7 +225,7 @@
 			[(#SET{compteur_recherches,#ENV{recherches_offre}|count})]
 			<B_choix_recherches>
 			<dd class="formTypeCheckbox clearfix">
-				<span class="label"><:candidatures:label_competences_recherche_consultation_tri:></span>
+				<span class="label"><:fraap_candidatures:label_competences_recherche_consultation_tri:></span>
 				<BOUCLE_choix_recherches(POUR){tableau #GET{data_competences}}>
 				[<span id="competences_recherche_#CLE" class="data-env">(#ENV{competences_recherche}|find{#CLE}|oui)#VALEUR</span> ]
 				</BOUCLE_choix_recherches>
@@ -250,21 +250,21 @@
 	<table id="stages-table">
 		<thead>
 			<tr>
-				<th><:candidatures:label_contact:></th>
-				<th><:candidatures:label_candidate:></th>
-				<th colspan="2"><:candidatures:label_dispo_consultation:></th>
-				<th colspan="2"><:candidatures:label_localisation_geo_consultation_abrev:></th>
-				<th colspan="4"><:candidatures:label_formation_consultation:></th>
-				<th colspan="2"><:candidatures:label_competences_recherches_consultation:></th>
+				<th><:fraap_candidatures:label_contact:></th>
+				<th><:fraap_candidatures:label_candidate:></th>
+				<th colspan="2"><:fraap_candidatures:label_dispo_consultation:></th>
+				<th colspan="2"><:fraap_candidatures:label_localisation_geo_consultation_abrev:></th>
+				<th colspan="4"><:fraap_candidatures:label_formation_consultation:></th>
+				<th colspan="2"><:fraap_candidatures:label_competences_recherches_consultation:></th>
 			</tr>
 			<tr>
 				<th></th>
-				<th><:candidatures:label_prenom:><br /><:candidatures:label_nom_tableau:></th>
-				<th><:candidatures:label_date_debut:></th><th><:candidatures:label_date_fin:></th>
-				<th><:candidatures:label_regions_consultation_abrev:></th><th><:candidatures:label_ville_consultation:></th>
-				<th><:candidatures:label_ecole:></th><th><:candidatures:label_ville_consultation:></th><th><:candidatures:label_diplome:></th><th><:candidatures:label_diplome_niveau:></th>
-				<th><:candidatures:label_competences_offre_consultation:></th>
-				<th><:candidatures:label_recherches_consultation:></th>
+				<th><:fraap_candidatures:label_prenom:><br /><:fraap_candidatures:label_nom_tableau:></th>
+				<th><:fraap_candidatures:label_date_debut:></th><th><:fraap_candidatures:label_date_fin:></th>
+				<th><:fraap_candidatures:label_regions_consultation_abrev:></th><th><:fraap_candidatures:label_ville_consultation:></th>
+				<th><:fraap_candidatures:label_ecole:></th><th><:fraap_candidatures:label_ville_consultation:></th><th><:fraap_candidatures:label_diplome:></th><th><:fraap_candidatures:label_diplome_niveau:></th>
+				<th><:fraap_candidatures:label_competences_offre_consultation:></th>
+				<th><:fraap_candidatures:label_recherches_consultation:></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -281,7 +281,7 @@
 			#SET{comp,#COMPETENCES_OFFRE|unserialize}
 			#SET{rech,#COMPETENCES_RECHERCHE|unserialize}
 			<tr id="stage#ID_CANDIDATURE" class="parent[ (#COMPTEUR_BOUCLE|alterner{'impaire','pair'})][ (#COMPTEUR_BOUCLE|modulo{3})]">
-				<td class="mail"><a class="icon mail" href="[(#URL_ARTICLE{509}|parametre_url{destinataire,#GET{id_auteur}})]" title="<:candidatures:envoyer_message:>"><:candidatures:envoyer_message:></a></td>
+				<td class="mail"><a class="icon mail" href="[(#URL_ARTICLE{509}|parametre_url{destinataire,#GET{id_auteur}})]" title="<:fraap_candidatures:envoyer_message:>"><:fraap_candidatures:envoyer_message:></a></td>
 				<td>#GET{auteur_prenom}<br />#GET{auteur_nom}</td>
 				<td>[(#DATE_DEBUT|affdate{d/m/Y})]</td>
 				<td>[(#DATE_FIN|affdate{d/m/Y})]</td>
@@ -311,6 +311,6 @@
 	</table>
 	[<p class="pagination bas clearfix">(#PAGINATION{page})</p>]
 	</B_stages>
-	<p><:candidatures:info_pas_de_resultat_stages:></p>
+	<p><:fraap_candidatures:info_pas_de_resultat_stages:></p>
 	<//B_stages>
 </div>

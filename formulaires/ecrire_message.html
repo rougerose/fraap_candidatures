@@ -14,7 +14,7 @@
 
 		[(#REM) les champs de saisie]
 		<fieldset>
-			<h3 class="legend"><:candidatures:envoyer_message_a{auteur=#GET{d}}:></h3>
+			<h3 class="legend"><:fraap_candidatures:envoyer_message_a{auteur=#GET{d}}:></h3>
 		<ul>
 			[(#ENV{destinataire}|is_null|non)
 			#SET{name,destinataire} #SET{obli,obligatoire} #SET{erreur,#ENV*{erreurs}|table_valeur{#GET{name}}}
