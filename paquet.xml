@@ -8,7 +8,8 @@
 >
     <nom>Fraap: interface publique et privée de gestion des candidatures de stages</nom>
     <auteur lien="http://rouge-rose.net">Christophe Le Drean</auteur>
-    <menu nom="candidatures" parent="menu_edition" titre="candidatures:stages" icone="images/candidatures-128.png" />
+    <menu nom="fraap_candidatures" parent="menu_edition" titre="candidatures:stages" icone="images/candidatures-16.png" />
+    <pipeline nom="jqueryui_plugins" inclure="fraap_candidatures_pipelines.php" />
     <pipeline nom="declarer_tables_interfaces" inclure="base/fraap_candidatures.php" />
     <pipeline nom="insert_head" inclure="fraap_candidatures_pipelines.php" />
     <pipeline nom="insert_head_prive" inclure="fraap_candidatures_pipelines.php" />

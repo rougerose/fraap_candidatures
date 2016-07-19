@@ -1,3 +1,4 @@
+#CACHE{0}
 	[(#REM)
 		tableaux des candidatures selon leur statut (poubelle, prop, publiees)
 		+ un tableau de l'ensemble des candidatures
@@ -50,7 +51,7 @@
 			<BOUCLE_test_etudiant(CONDITION){si #ACTIVITE|=={2}|oui}>
 			<div id="gestion-candidatures">
 				<h2><:fraap_candidatures:titre_candidatures:></h2>
-				[<p class="compteur-candidatures">(#GET{total_c}|singulier_ou_pluriel{candidatures:candidature_enregistree,candidatures:candidatures_enregistrees,nb})</p>]
+				[<p class="compteur-candidatures">(#GET{total_c}|singulier_ou_pluriel{fraap_candidatures:candidature_enregistree,fraap_candidatures:candidatures_enregistrees,nb})</p>]
 				<div class="actions clearfix">
 					<ul>
 						<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt ajouter" title="<:fraap_candidatures:label_bouton_ajouter_candidature:>"><:fraap_candidatures:label_bouton_ajouter_candidature:></a></li>

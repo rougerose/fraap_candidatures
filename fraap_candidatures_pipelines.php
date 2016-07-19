@@ -1,6 +1,14 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// jquery ui tabs
+function fraap_candidatures_jqueryui_plugins($scripts){
+   $scripts[] = "jquery.ui.tabs";
+   $scripts[] = "jquery.ui.accordion";
+   $scripts[] = "jquery.ui.datepicker";
+   return $scripts;
+}
+
 function fraap_candidatures_insert_head($flux) {
   $dossier = 'javascript/';
   $scripts = array(
@@ -17,7 +25,7 @@ function fraap_candidatures_insert_head($flux) {
 
 
 function fraap_candidatures_insert_head_prive($flux){
-	
+
 	$flux .="\n".'<script src="'.find_in_path('javascript/candidatures-prive.js').'" type="text/javascript"></script>';
 	$flux .="\n".'<link rel="stylesheet" href="'.find_in_path('css/candidatures-prive.css').'" type="text/css" media="screen" />';
 
