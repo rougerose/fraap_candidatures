@@ -1,7 +1,7 @@
 <BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
 [(#SET{urlmessages,#URL_ARTICLE{511}})]
 <li class="menu-entree item[ (#ENV{css})]">
-  <p class="bienvenue"><:candidatures:bienvenue:> #PRENOM #NOM</p>
+  <p class="bienvenue"><:fraap_candidatures:bienvenue:> #PRENOM #NOM</p>
   <B_nonlus>
   <p class="messages">
     <BOUCLE_nonlus(MESSAGES auteurs_liens){auteurs_liens.id_auteur=#SESSION{id_auteur}}{auteurs_liens.vu=non}> </BOUCLE_nonlus>
@@ -9,7 +9,7 @@
   </p>
   </B_nonlus>
   <div id="identification-detail">
-    <p class="profil">Accéder à <a href="[(#URL_PAGE{profil}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="<:candidatures:info_consultation_profil:>">votre profil</a></p>
+    <p class="profil">Accéder à <a href="[(#URL_PAGE{profil}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="<:fraap_candidatures:info_consultation_profil:>">votre profil</a></p>
     <p class="logout"><a href="#URL_LOGOUT" class="">Se déconnecter</a></p>
   </div>
 </li>

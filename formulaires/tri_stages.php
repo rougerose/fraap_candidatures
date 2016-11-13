@@ -44,7 +44,7 @@ function formulaires_tri_stages_verifier_dist(){
 			if ($input == $sortie) {
 				return;
 			} else {
-			//	$erreurs["ville_stage"] = _T('candidatures:erreur_champ_ville_stage');
+			//	$erreurs["ville_stage"] = _T('fraap_candidatures:erreur_champ_ville_stage');
 				set_request("ville_stage",$sortie);
 			}
 		}

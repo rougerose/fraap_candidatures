@@ -6,15 +6,15 @@
 <div>
 	<B_inscriptions>
 	<p class="verdana2">
-		[(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:criteres_resultat,candidatures:criteres_resultats,nb})]
+		[(#GRAND_TOTAL|singulier_ou_pluriel{fraap_candidatures:criteres_resultat,fraap_candidatures:criteres_resultats,nb})]
 		<BOUCLE_artistes(AUTEURS){id_auteur IN #GET{visiteurs}}{tout}{activite=1}></BOUCLE_artistes>
-		([(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:nb-artiste,candidatures:nb-artistes,nb}|sinon{0 artiste})&nbsp;;]
+		([(#GRAND_TOTAL|singulier_ou_pluriel{fraap_candidatures:nb-artiste,fraap_candidatures:nb-artistes,nb}|sinon{0 artiste})&nbsp;;]
 		<//B_artistes>
 		<BOUCLE_etudiants(AUTEURS){id_auteur IN #GET{visiteurs}}{tout}{activite=2}></BOUCLE_etudiants>
-		[(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:nb-etudiant,candidatures:nb-etudiants,nb}|sinon{0 étudiant})]
+		[(#GRAND_TOTAL|singulier_ou_pluriel{fraap_candidatures:nb-etudiant,fraap_candidatures:nb-etudiants,nb}|sinon{0 étudiant})]
 		<//B_etudiants>
 		<BOUCLE_inconnus(AUTEURS){id_auteur IN #GET{visiteurs}}{tout}{activite=0}></BOUCLE_inconnus>
-		[; (#GRAND_TOTAL|singulier_ou_pluriel{candidatures:nb-inconnu,candidatures:nb-inconnus,nb})])
+		[; (#GRAND_TOTAL|singulier_ou_pluriel{fraap_candidatures:nb-inconnu,fraap_candidatures:nb-inconnus,nb})])
 		<//B_inconnus>
 	</p>
 
@@ -44,7 +44,7 @@
 				</td>
 				<td>
 					<BOUCLE_compteur_inscriptions(CANDIDATURES){tout}{id_auteur}></BOUCLE_compteur_inscriptions>
-					[(#TOTAL_BOUCLE|singulier_ou_pluriel{candidatures:candidature,candidatures:candidatures,nb}|sinon{aucune candidature})]
+					[(#TOTAL_BOUCLE|singulier_ou_pluriel{fraap_candidatures:candidature,fraap_candidatures:candidatures,nb}|sinon{aucune candidature})]
 					<//B_compteur_inscriptions>
 				</td>
 			</tr>
