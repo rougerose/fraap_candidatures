@@ -1,3 +1,4 @@
+#CACHE{0}
 	[(#REM)
 		tableaux des candidatures selon leur statut (poubelle, prop, publiees)
 		+ un tableau de l'ensemble des candidatures
@@ -42,18 +43,18 @@
 
 		<div id="extra">
 			<div id="gestion-messages">
-				<h2><:candidatures:titre_messages:></h2>
+				<h2><:fraap_candidatures:titre_messages:></h2>
 				[(#INCLURE{fond=inclure/navigation-messagerie,env})]
 			</div><!-- #gestion-messages -->
 
 			[(#REM) s'il le visiteur est un étudiant, on affiche rien à propos des candidatures ]
 			<BOUCLE_test_etudiant(CONDITION){si #ACTIVITE|=={2}|oui}>
 			<div id="gestion-candidatures">
-				<h2><:candidatures:titre_candidatures:></h2>
-				[<p class="compteur-candidatures">(#GET{total_c}|singulier_ou_pluriel{candidatures:candidature_enregistree,candidatures:candidatures_enregistrees,nb})</p>]
+				<h2><:fraap_candidatures:titre_candidatures:></h2>
+				[<p class="compteur-candidatures">(#GET{total_c}|singulier_ou_pluriel{fraap_candidatures:candidature_enregistree,fraap_candidatures:candidatures_enregistrees,nb})</p>]
 				<div class="actions clearfix">
 					<ul>
-						<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt ajouter" title="<:candidatures:label_bouton_ajouter_candidature:>"><:candidatures:label_bouton_ajouter_candidature:></a></li>
+						<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt ajouter" title="<:fraap_candidatures:label_bouton_ajouter_candidature:>"><:fraap_candidatures:label_bouton_ajouter_candidature:></a></li>
 					</ul>
 					<p></p>
 				</div><!-- .actions -->
@@ -62,10 +63,10 @@
 					<BOUCLE_candidatures(CANDIDATURES){id_candidature IN #GET{c}}{par date}>
 					#SET{reg,#REGIONS|unserialize} #SET{offres,#COMPETENCES_OFFRE|unserialize} #SET{recherches,#COMPETENCES_RECHERCHE|unserialize}
 					<li>
-						<h3><span class="uiHeader"><:candidatures:candidature_numero:> #COMPTEUR_BOUCLE</span></h3>
+						<h3><span class="uiHeader"><:fraap_candidatures:candidature_numero:> #COMPTEUR_BOUCLE</span></h3>
 						<div class="bloc">
 							<p>
-								[<:candidatures:periode_du_maj:> (#DATE_DEBUT|affdate{d/m/Y})[ <:candidatures:periode_au_min:> (#DATE_FIN|affdate{d/m/Y})]]
+								[<:fraap_candidatures:periode_du_maj:> (#DATE_DEBUT|affdate{d/m/Y})[ <:fraap_candidatures:periode_au_min:> (#DATE_FIN|affdate{d/m/Y})]]
 							</p>
 							<B_regions>
 							<p>
@@ -90,8 +91,8 @@
 							</B_recherches>
 							<div class="actions clearfix">
 								<ul>
-									<li><a href="[(#URL_ACTION_AUTEUR{supprimer_candidature,#ID_CANDIDATURE,#SELF})]" class="bt supprimer" title="<:candidatures:label_bouton_supprimer_candidature:>"><:candidatures:label_bouton_supprimer_candidature:></a></li>
-									<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt modifier" title="<:candidatures:label_bouton_modifier_candidature:>"><:candidatures:label_bouton_modifier_candidature:></a></li>
+									<li><a href="[(#URL_ACTION_AUTEUR{supprimer_candidature,#ID_CANDIDATURE,#SELF})]" class="bt supprimer" title="<:fraap_candidatures:label_bouton_supprimer_candidature:>"><:fraap_candidatures:label_bouton_supprimer_candidature:></a></li>
+									<li><a href="[(#URL_PAGE{candidature}|parametre_url{id_candidature,#ID_CANDIDATURE})]" class="bt modifier" title="<:fraap_candidatures:label_bouton_modifier_candidature:>"><:fraap_candidatures:label_bouton_modifier_candidature:></a></li>
 								</ul>
 							</div><!-- .actions -->
 						</div><!-- .bloc -->
@@ -99,7 +100,7 @@
 					</BOUCLE_candidatures>
 				</ol>
 				</B_candidatures>
-				<p><:candidatures:pas_de_candidature:></p>
+				<p><:fraap_candidatures:pas_de_candidature:></p>
 				<//B_candidatures>
 			</div><!-- #gestion-candidatures -->
 			</BOUCLE_test_etudiant>

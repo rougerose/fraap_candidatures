@@ -44,7 +44,7 @@ function formulaires_tri_stages_verifier_dist(){
 			if ($input == $sortie) {
 				return;
 			} else {
-			//	$erreurs["ville_stage"] = _T('candidatures:erreur_champ_ville_stage');
+			//	$erreurs["ville_stage"] = _T('fraap_candidatures:erreur_champ_ville_stage');
 				set_request("ville_stage",$sortie);
 			}
 		}
@@ -57,7 +57,7 @@ function formulaires_tri_stages_verifier_dist(){
 	$date_fin = verifier_corriger_date_saisie('fin',$horaire,$erreurs);
 
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
-	$erreurs['date_fin'] = _T('candidatures:erreur_date_avant_apres');
+	$erreurs['date_fin'] = _T('fraap_candidatures:erreur_date_avant_apres');
 
 	return $erreurs;
 }

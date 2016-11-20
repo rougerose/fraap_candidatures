@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 include_spip('base/create');
 
-function candidatures_upgrade($nom_meta_base_version, $version_cible){
+function fraap_candidatures_upgrade($nom_meta_base_version, $version_cible){
 
 	$current_version = "0.0";
 
@@ -38,7 +38,7 @@ function candidatures_upgrade($nom_meta_base_version, $version_cible){
 */
 }
 
-function candidatures_vider_tables($nom_meta_base_version) {
+function fraap_candidatures_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_drop_table("spip_candidatures");
 	sql_alter("TABLE spip_auteurs DROP COLUMN prenom");

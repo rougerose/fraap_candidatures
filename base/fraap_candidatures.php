@@ -1,12 +1,12 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function candidatures_declarer_tables_interfaces($interface){
+function fraap_candidatures_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['candidatures'] = 'candidatures';
 //	$interface['table_des_traitements']['RACE']['chats'] = _TRAITEMENT_TYPO;
 	return $interface;
 }
-function candidatures_declarer_tables_principales($tables_principales){
+function fraap_candidatures_declarer_tables_principales($tables_principales){
 	$candidatures = array(
 		"id_candidature" => "bigint(21) NOT NULL",
 		"id_auteur" => "bigint(21) NOT NULL",

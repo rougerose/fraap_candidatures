@@ -12,11 +12,11 @@
 
 <div>
 	<B_stages>
-	<p class="verdana2">[(#GRAND_TOTAL|singulier_ou_pluriel{candidatures:criteres_resultat,candidatures:criteres_resultats,nb})]</p>
+	<p class="verdana2">[(#GRAND_TOTAL|singulier_ou_pluriel{fraap_candidatures:criteres_resultat,fraap_candidatures:criteres_resultats,nb})]</p>
 	[<p class="pagination">(#PAGINATION{page})</p>]
 	<table id="candidatures" class="verdana1" style="width:100%;" cellpadding="0" cellspacing="0">
 		<thead>
-			<tr class="titrem arial2"><th>#</th><th>NOM Prénom</th><th>Créer</th><th>Modifier</th><th colspan="2">Candidature</th><th></th></tr>
+			<tr class="titrem arial2"><th>#</th><th>NOM Prénom</th><th>Date création</th><th>Date modification</th><th colspan="2">Candidature</th><th></th></tr>
 		</thead>
 		<tbody>
 			<BOUCLE_stages(CANDIDATURES){tout}{!par date}{pagination}>
@@ -37,7 +37,7 @@
 				<td rowspan="8">[(#DATE|affdate{d/m/Y})]</td>
 				<td rowspan="8">[(#MAJ|affdate{d/m/Y})]</td>
 				<th>Du</th><td>[(#DATE_DEBUT|affdate{d/m/Y})]</td>
-				<td class="supprimer" rowspan="8"><a href="[(#URL_ACTION_AUTEUR{supprimer_candidature,#ID_CANDIDATURE,#SELF})]" class="bt supprimer" title="<:candidatures:label_bouton_supprimer_candidature:>">X</a></td>
+				<td class="supprimer" rowspan="8"><a href="[(#URL_ACTION_AUTEUR{supprimer_candidature,#ID_CANDIDATURE,#SELF})]" class="bt supprimer" title="<:fraap_candidatures:label_bouton_supprimer_candidature:>">X</a></td>
 			</tr>
 			<tr>
 				<th>Au</th><td>[(#DATE_FIN|affdate{d/m/Y})]</td>
