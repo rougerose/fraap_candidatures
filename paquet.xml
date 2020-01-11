@@ -3,8 +3,9 @@
     version="2.0.0"
     etat="test"
     categorie="squelette"
-    compatibilite="[3.0.0;3.0.*]"
+    compatibilite="[3.0.0;3.2.*]"
     logo="images/candidatures-128.png"
+    schema="1.1.0"
 >
     <nom>Fraap.org : interface publique et privée de gestion des candidatures de stages</nom>
     <auteur lien="http://rouge-rose.net">Christophe Le Drean</auteur>

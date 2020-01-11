@@ -3,7 +3,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function fraap_candidatures_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['candidatures'] = 'candidatures';
-//	$interface['table_des_traitements']['RACE']['chats'] = _TRAITEMENT_TYPO;
 	return $interface;
 }
 function fraap_candidatures_declarer_tables_principales($tables_principales){
