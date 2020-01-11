@@ -32,13 +32,9 @@ function fraap_candidatures_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_candidatures'))
 	);
 
-	//cextras_api_upgrade(fraap_candidatures_declarer_champs_extras(), $maj['create']);
-
 	$maj['1.1.0'] = array(
 		array('sql_alter', 'TABLE spip_auteurs MODIFY COLUMN activite TINYINT(1) NOT NULL DEFAULT 0')
 	);
-
-	//cextras_api_upgrade(fraap_candidatures_declarer_champs_extras(), $maj['1.2.3']);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
