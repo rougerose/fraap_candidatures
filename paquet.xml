@@ -1,6 +1,6 @@
 <paquet
     prefix="fraap_candidatures"
-    version="2.1.0"
+    version="2.1.1"
     etat="test"
     categorie="divers"
     compatibilite="[3.0.0;3.2.*]"
@@ -19,11 +19,11 @@
     <pipeline nom="insert_head_prive" inclure="fraap_candidatures_pipelines.php" />
 
     <necessite nom="accesrestreint" compatibilite="[3.14.1;]" />
-    <necessite nom="cextras" compatibilite="[3.11.3;[" />
+    <necessite nom="cextras" compatibilite="[3.11.3;]" />
     <necessite nom="menus" compatibilite="[1.5.15;]" />
     <necessite nom="saisies" compatibilite="[2.5.30;]" />
     <necessite nom="messagerie" compatibilite="[3.1.4;]" />
-    <necessite nom="organiseur" compatibilite="[0.8.5;[" />
+    <necessite nom="organiseur" compatibilite="[0.8.5;]" />
 
     <menu nom="candidatures" parent="menu_edition" titre="fraap_candidatures:stages" icone="images/candidatures-16.png" />
 </paquet>
