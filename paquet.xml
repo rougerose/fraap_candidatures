@@ -1,6 +1,6 @@
 <paquet
     prefix="fraap_candidatures"
-    version="2.1.2"
+    version="2.1.3"
     etat="test"
     categorie="divers"
     compatibilite="[3.0.0;3.2.*]"

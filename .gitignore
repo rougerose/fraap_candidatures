@@ -1,2 +1,5 @@
 # fichiers systemes
 .DS_Store
+
+# vscode
+.vscode/*
